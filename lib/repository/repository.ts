@@ -116,7 +116,7 @@ export class Repository<T extends Entity = Record<string, any>> {
       /* NOTE: It would be better if this error handler was only around the call
          to `.dropIndex`. Might muss up the code a bit though. Life is full of
          tough choices. */
-      if (e instanceof Error && (e.message === "Unknown Index name" || e.message === "Unknown index name")) {
+      if (  e instanceof Error && (e.message.includes("Unknown Index name") || e.message.includes("Unknown index name") || e.message.includes("no such index"))) {
         // no-op: the thing we are dropping doesn't exist
       } else {
         throw e
